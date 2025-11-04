@@ -1,0 +1,57 @@
+Lung and Tumor prediction model
+
+Trained on ~600 cases
+
+achieved 0.88 Dice, which is very good
+
+model saved in 
+nnUnet-LungTumor/nnUnet_results/Dataset001_LungTumor/nnUNetTrainer__nnUNetPlans__3d_fullres/fold_0/
+
+
+BEFORE YOU RUN:
+make sure all the data is 
+	-256x256x256
+	-In the correct orientation
+	-scaled to HU
+
+TO RUN:
+open up terminal
+
+1. Activate environment (not necessary but useful to ensure longevity)
+	go to : /home/ascott/Documents/Jupyter-sandbox/nnUnet-LungTumor/
+	run : source nnUet/bin/activate
+	open the file exports
+	export those variables in terminal (run the following):
+	
+	# raw data, unpreprocessed
+	export nnUNet_raw="[Not important for inference]"
+
+	# data, processed into pkl files
+	export nnUNet_preprocessed="[Not important for inference]"
+
+	# results, where the model is stored
+	export nnUNet_results="[directory/where/you/stored/the/model]"
+	
+2. Navigate to the folder of scans you want to analyze
+	
+3. Make sure scans are in a single folder and create a folder for predictions
+	Scans must be in the form 
+		[image folder]/img_[number]_0000.nii.gz
+		
+4. In terminal, run the following:
+	nnUNetv2_predict -i [image folder] -o [output folder] -f 0 -d 1
+	
+	Note:
+	-f is fold. The model is trained on a 5 crossfold validation
+	and 0 means that the first chunk was used for validation and the rest were
+	used for training
+	-d is dataset 1, the dataset that was used to train lung and tumor segmentations
+	
+ALTERNATIVE OPTION:
+1. If you images are saved as a folder with individual .tif files inside, open PredictTumorFromTifs.py
+
+2. Navigate to lines 250, 251 and edit to point to the folder and model
+
+3. Run the following in terminal:
+	python3 -m PredictTumorFromTifs.py
+	

@@ -1,0 +1,18 @@
+Downloading the model:
+
+[optional] : create a new virtualenv to run the model
+enter into the virtualenv using 
+	source /[whatever name you chose]/bin/activate
+Note:after you're done, leave using 
+	deactivate
+
+
+To import (either in the virtualenv or not):
+pip install pytorch
+pip install nnunet
+go to the folder with the zip
+in terminal, you should now have access to the command:
+	nnUNetv2_install_pretrained_model_from_zip [zip file name]
+	
+Now to run the model, refer to the next text file
+	
